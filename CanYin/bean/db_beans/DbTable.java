@@ -46,7 +46,7 @@ public class DbTable implements Serializable {
 	private Integer isorder;
 
 	/** SalesID. */
-	private Integer salesid;
+	private String salesid;
 
 	/** waiter. */
 	private Integer waiter;
@@ -252,7 +252,7 @@ public class DbTable implements Serializable {
 	 * @param salesid
 	 *            SalesID
 	 */
-	public void setSalesid(Integer salesid) {
+	public void setSalesid(String salesid) {
 		this.salesid = salesid;
 	}
 
@@ -261,7 +261,7 @@ public class DbTable implements Serializable {
 	 * 
 	 * @return SalesID
 	 */
-	public Integer getSalesid() {
+	public String getSalesid() {
 		return this.salesid;
 	}
 

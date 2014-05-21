@@ -49,7 +49,8 @@ public class TableModules {
 			tablebean.setStarttime(new java.sql.Date(new java.util.Date().getTime()));
 			tablebean.setWaiter(waiter);
 			tablebean.setAllow(persons);
-			tablebean.setSalesid(Integer.valueOf(MyLong.gen_SaleID()));
+			tablebean.setSalesid(MyLong.gen_SaleID());
+			dao.update(tablebean);
 			return new AjaxJSON("开台成功");
 			
 		}else{

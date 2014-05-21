@@ -29,13 +29,67 @@ CREATE TABLE db_table
 	state varchar(20),
 	isorder int,
 	SalesID int,
-	Water int,
+	waivter varchar(20),
 	prepay float,
 	starttime smalldatetime,
 	finishtime smalldatetime,
 	desrc varchar(200),
 	reserve varchar(100),
 	permission int,
+	PRIMARY KEY (ID)
+);
+
+
+CREATE TABLE db_goods
+(
+	ID int NOT NULL IDENTITY ,
+	name varchar(20),
+	sort varchar(20),
+	supplyID int,
+	barcode varchar(50),
+	picaddr varchar(100),
+	surplus int,
+	desrc varchar(100),
+	logo varchar(20),
+	mprice float,
+	bprice float,
+	rate float,
+	classname varchar(10),
+	validity int,
+	PRIMARY KEY (ID)
+);
+
+
+CREATE TABLE db_Dishes
+(
+	ID int NOT NULL IDENTITY ,
+	name varchar(20),
+	sort varchar(20),
+	barcode varchar(50),
+	picaddr varchar(100),
+	desrc varchar(100),
+	logo varchar(20),
+	mprice float,
+	bprice float,
+	rate float,
+	classname varchar(10),
+	validity int,
+	cost float,
+	PRIMARY KEY (ID)
+);
+
+
+CREATE TABLE db_sales
+(
+	ID int NOT NULL IDENTITY ,
+	salename varchar(100),
+	bprice float,
+	mprice float,
+	quantity int,
+	rmbsum float,
+	waivter varchar(20),
+	creattime smalldatetime,
+	state varchar(20),
 	PRIMARY KEY (ID)
 );
 
