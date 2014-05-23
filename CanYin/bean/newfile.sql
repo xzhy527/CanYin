@@ -90,6 +90,21 @@ CREATE TABLE db_sales
 	waivter varchar(20),
 	creattime smalldatetime,
 	state varchar(20),
+	SaleID varchar(100),
+	PRIMARY KEY (ID)
+);
+
+
+CREATE TABLE db_account
+(
+	ID int NOT NULL IDENTITY ,
+	SaleID varchar(50),
+	paytype varchar(20),
+	cmoney float,
+	rmoney float,
+	operation varchar(20),
+	creattime smalldatetime,
+	member int,
 	PRIMARY KEY (ID)
 );
 
