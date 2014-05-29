@@ -1,4 +1,4 @@
-package modules.userModules;
+package modules.usermodules;
 
 import java.util.Date;
 import java.util.List;
@@ -9,10 +9,10 @@ import org.nutz.ioc.loader.annotation.IocBean;
 import org.nutz.mvc.annotation.At;
 import org.nutz.mvc.annotation.Ok;
 
+import tools.MyDao;
 import db_beans.DbAccount;
 import db_beans.DbSales;
 import db_beans.DbTable;
-import tools.MyDao;
 
 @IocBean
 public class AccountModules {

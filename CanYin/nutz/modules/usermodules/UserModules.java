@@ -1,4 +1,4 @@
-package modules.userModules;
+package modules.usermodules;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,6 +9,7 @@ import org.nutz.mvc.View;
 import org.nutz.mvc.annotation.At;
 import org.nutz.mvc.view.JspView;
 import org.nutz.mvc.view.ViewWrapper;
+
 import tools.MyDao;
 import db_beans.DbUser;
 import debeans.AjaxJSON;

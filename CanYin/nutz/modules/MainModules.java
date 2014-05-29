@@ -20,7 +20,7 @@ import tools.MyDao;
 
 @IocBy(type=ComboIocProvider.class,args={	
 "*org.nutz.ioc.loader.json.JsonLoader","/dao.js",
-"*org.nutz.ioc.loader.annotation.AnnotationIocLoader","modules"
+"*org.nutz.ioc.loader.annotation.AnnotationIocLoader","modules",
 })
 @IocBean
 public class MainModules {	
@@ -28,19 +28,17 @@ public class MainModules {
 	MyDao dao;
 @At("test")
 @Ok("json")
-	public Object test_url(String paramstr){	
+	public Object test_url(String paramstr){	 
 		Date _t = null;
 		if(Strings.isBlank(paramstr)){
 			_t=new Date();
 			paramstr=_t.toString();
 		}
-		return paramstr;
+		return paramstr+1;
 	}
-@At()
-@Ok("json")
-	public Object test_ioc(){
-		System.out.println(dao);
-		return dao.query("select * from db_config");
-	}
+public Object getnow(){
+	
+	return new Date();
+}
 
 }
