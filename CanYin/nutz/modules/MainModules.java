@@ -10,10 +10,7 @@ import org.nutz.mvc.annotation.IocBy;
 import org.nutz.mvc.annotation.Modules;
 import org.nutz.mvc.annotation.Ok;
 import org.nutz.mvc.ioc.provider.ComboIocProvider;
-
 import tools.MyDao;
-
-
 @Modules(scanPackage=true)
 
 //@SetupBy(value=modules.NutzSetup.class)
@@ -22,6 +19,7 @@ import tools.MyDao;
 "*org.nutz.ioc.loader.json.JsonLoader","/dao.js",
 "*org.nutz.ioc.loader.annotation.AnnotationIocLoader","modules",
 })
+
 @IocBean
 public class MainModules {	
 	@Inject
@@ -36,9 +34,7 @@ public class MainModules {
 		}
 		return paramstr+1;
 	}
-public Object getnow(){
-	
-	return new Date();
-}
-
+	public Object getnow(){
+		return new Date();
+	}
 }

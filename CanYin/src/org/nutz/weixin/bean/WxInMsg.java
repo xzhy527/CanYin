@@ -2,7 +2,6 @@ package org.nutz.weixin.bean;
 
 import org.nutz.json.JsonIgnore;
 
-
 public class WxInMsg {
 	
 	private String fromUserName;
