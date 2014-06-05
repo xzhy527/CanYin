@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>这是测试html5 websocket</title>
+</head>
+<script src="js/socket.io.js"></script>
+<script type="text/javascript">
+    var socket;
+    function connect(){
+        socket = new WebSocket('ws://192.198.168.130:7777/echo');
+        socket.onopen=function(e){
+            alert("连接成功");
+            socket.send('I am the client and I\'m listening!');
+        };
+        socket.onerror=function(e){
+            alert("连接失败");
+        };
+    }
+
+
+
+
+    function sendmessage(){
+        alert(socket.readyState);
+        //socket.send('I am the client and I\'m listening!');
+    }
+    function socketIO_test(){
+        var socket_i = io.connect('http://192.198.168.130:7777');
+            socket_i.on('connect', function(){
+            alert("fsadfsad");
+            socket_i.on('event', function(data){});
+            socket_i.on('disconnect', function(){});
+        });
+       // socket_i.connect();
+
+    }
+
+
+
+
+
+</script>
+
+
+<body>
+
+<h1>7777</h1>
+<button onclick="connect()" >连接</button>
+<button onclick="sendmessage()" >发信息</button>
+<button onclick="socketIO_test()" >测试socketio15150</button>
+
+</body>
+</html>

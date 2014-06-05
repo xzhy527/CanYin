@@ -99,20 +99,6 @@ CREATE TABLE db_table
 );
 
 
-CREATE TABLE db_permission
-(
-	ID int NOT NULL IDENTITY ,
-	-- 组权限
-	-- 用户权限
-	Type varchar(10),
-	-- 权限名称
-	Perm_Name varchar(20),
-	-- 权限值
-	Perm_Value int,
-	PRIMARY KEY (ID)
-);
-
-
 CREATE TABLE db_optlog
 (
 	ID int,
@@ -122,22 +108,7 @@ CREATE TABLE db_optlog
 	CreateTime smalldatetime,
 	TableID int,
 	InWay varchar(10),
-	Operator 
-);
-
-
-CREATE TABLE db_user
-(
-	ID int NOT NULL IDENTITY ,
-	GroupID int,
-	LoginName varchar(20),
-	LoginPWD varchar(20),
-	CreatTime smalldatetime,
-	EmployID int,
-	LoginIP varchar(20),
-	LastTime smalldatetime,
-	Status int,
-	PRIMARY KEY (ID)
+	Operator varchar(100)
 );
 
 
@@ -156,6 +127,39 @@ CREATE TABLE db_order
 	Operater varchar(20),
 	Prepay float,
 	CreateTime smalldatetime,
+	State int,
+	PRIMARY KEY (ID)
+);
+
+
+CREATE TABLE db_user
+(
+	ID int NOT NULL IDENTITY ,
+	GroupID int,
+	LoginName varchar(20),
+	LoginPWD varchar(20),
+	CreatTime smalldatetime,
+	EmployID int,
+	LoginIP varchar(20),
+	LastTime smalldatetime,
+	Status int,
+	PRIMARY KEY (ID)
+);
+
+
+CREATE TABLE db_permission
+(
+	ID int NOT NULL IDENTITY ,
+	-- 组权限
+	-- 用户权限
+	Type varchar(10),
+	-- 权限名称
+	Perm_Name varchar(20),
+	-- 权限值
+	Perm_Value int,
+	State int,
+	UserID int,
+	GroupID int,
 	PRIMARY KEY (ID)
 );
 

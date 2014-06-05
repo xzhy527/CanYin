@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.nutz.dao.Chain;
 import org.nutz.dao.Cnd;
+import org.nutz.ioc.aop.Aop;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
 import org.nutz.mvc.annotation.At;
@@ -35,10 +36,12 @@ public class TableModules {
  * @param dataType
  * @return
  */
+
 	
+@Aop("canYinInterceptor")	
 @At()
 @Ok("json")
-	public Object startTable(int ID,int waiter,int persons,String dataType){
+	public Object startTable(int waiter,int ID,int persons,String dataType){
 		if(ID<1){
 			return new AjaxJSON("ID不能为空",500);
 		}
@@ -50,12 +53,9 @@ public class TableModules {
 		if(dao.getpermisson(waiter,"KT")<1){
 			return new AjaxJSON("对不起，您没有开台的权限",502);
 		}
-		
-		
 		DbTable tablebean = dao.fetch(DbTable.class, ID);
 		String state = tablebean.getState();
-		if(state.equals("空闲")){
-			
+		if(state.equals("空闲")){			
 			Date c_time=new Date();			
 			dao.update(DbOrder.class, Chain.make("State", -1), Cnd.where("HoldTime","<",c_time));			
 			//Cnd.wrap("where TableID="+ID+"OrderTime>="+new Date()+" order by OrderTime asc");			
