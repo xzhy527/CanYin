@@ -2,15 +2,18 @@ package modules.usermodules;
 
 import javax.servlet.http.HttpSession;
 
+import org.nutz.dao.Cnd;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
 import org.nutz.lang.Strings;
 import org.nutz.mvc.View;
 import org.nutz.mvc.annotation.At;
+import org.nutz.mvc.annotation.Ok;
 import org.nutz.mvc.view.JspView;
 import org.nutz.mvc.view.ViewWrapper;
 
 import tools.MyDao;
+import db_beans.DbOptlog;
 import db_beans.DbUser;
 import debeans.AjaxJSON;
 @IocBean
@@ -37,4 +40,34 @@ public View login_Base(String loginName,String loginPWD,HttpSession session){
 	System.out.println("fsadfas");
 	return new ViewWrapper(new JspView("/index.jsp"), ub);
 }
+
+@At("wxlogin")
+@Ok("json")
+public Object wxlogin(String loginname,String loginpassword,HttpSession session,String topage){
+	if(Strings.isBlank(loginname)){
+		return new AjaxJSON("用户名不能为空");
+	}	
+	if(Strings.isBlank(loginpassword)){
+		return new AjaxJSON("密码不能为空");
+	}
+	
+	DbUser ubean = dao.fetch(DbUser.class,Cnd.where("LoginName","=",loginname));
+	if(ubean==null){
+		return new AjaxJSON("用户名不存在");
+	}
+	if(loginpassword.equals(ubean.getLoginpwd())){
+		session.setAttribute("loginuser", ubean);		
+		DbOptlog dblog = new DbOptlog();		
+		dblog.setType("微信登陆");		
+		dblog.setOperator(loginname);
+		dao.insert(dblog);		
+		return new AjaxJSON("登陆成功");
+	}else{
+		return new AjaxJSON("密码错误，请重试！");
+	}
+	
+}
+
+
+
 }

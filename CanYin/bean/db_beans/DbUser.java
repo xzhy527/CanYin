@@ -50,6 +50,7 @@ public class DbUser implements Serializable {
 	/**
 	 * Constructor.
 	 */
+	private String wxID;
 	public DbUser() {
 	}
 
@@ -222,6 +223,14 @@ public class DbUser implements Serializable {
 	 */
 	public Integer getStatus() {
 		return this.status;
+	}
+
+	public String getWxID() {
+		return wxID;
+	}
+
+	public void setWxID(String wxID) {
+		this.wxID = wxID;
 	}
 
 

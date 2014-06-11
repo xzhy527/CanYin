@@ -19,6 +19,7 @@ import org.nutz.lang.Strings;
 
 import db_beans.DbConfig;
 import db_beans.DbPermission;
+import db_beans.DbTable;
 
 public class MyDao extends NutDao {
 	
@@ -93,5 +94,6 @@ public class MyDao extends NutDao {
 	  }
 	 return  pbean.getPermValue();
   }
+
   
 }

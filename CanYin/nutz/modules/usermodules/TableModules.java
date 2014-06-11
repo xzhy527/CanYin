@@ -1,32 +1,28 @@
 package modules.usermodules;
 
 import java.util.Date;
-import java.util.UUID;
+import java.util.List;
 
 import org.nutz.dao.Chain;
 import org.nutz.dao.Cnd;
 import org.nutz.ioc.aop.Aop;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
+import org.nutz.lang.Strings;
 import org.nutz.mvc.annotation.At;
 import org.nutz.mvc.annotation.Ok;
-import org.nutz.mvc.view.JspView;
-import org.nutz.mvc.view.UTF8JsonView;
-import org.nutz.mvc.view.ViewWrapper;
 
+import tools.MyDao;
+import tools.MyLong;
+import db_beans.DbConfig;
 import db_beans.DbOptlog;
 import db_beans.DbOrder;
 import db_beans.DbTable;
 import db_beans.DbUser;
 import debeans.AjaxJSON;
-import tools.MyDao;
-import tools.MyLong;
-
 @IocBean
 public class TableModules {
-	
 	@Inject
-	
 	MyDao dao;
 /**
  * 开台操作	
@@ -35,9 +31,7 @@ public class TableModules {
  * @param persons
  * @param dataType
  * @return
- */
-
-	
+ */	
 @Aop("canYinInterceptor")	
 @At()
 @Ok("json")
@@ -83,4 +77,50 @@ public class TableModules {
 			return new AjaxJSON("不能开台",203);
 		}
 	}
+
+@At()
+@Ok("json")
+public Object gettablepos(){	
+	List<DbConfig> beans = dao.query(DbConfig.class,Cnd.where("name","=","桌台位置"));	
+	return beans;
+}
+@At()
+@Ok("json")
+public Object gettabletype(){	
+	List<DbConfig> beans = dao.query(DbConfig.class,Cnd.where("name","=","桌台类型"));	
+	return beans;
+}
+@At()
+@Ok("json")
+public Object gettables(String pos,String type,String state,String alias){
+	
+	String sqltext="";	
+	if(!Strings.isBlank(pos)){
+		sqltext+="position='"+pos+"' and ";
+	}
+	if(!Strings.isBlank(type)){
+		sqltext+="type='"+type+"' and ";
+	}
+	if(!Strings.isBlank(state)){
+		sqltext+="state='"+state+"' and ";
+	}
+	if(!Strings.isBlank(alias)){
+		sqltext+="state like '%"+state+"'% and ";
+	}
+	if(sqltext.length()>0){
+		sqltext=" where "+ sqltext.substring(0,sqltext.length()-5);
+	}
+	List<DbTable> beans = dao.query("select * from db_Table "+sqltext);	
+	return beans;
+}
+@At()
+@Ok("json")
+public Object gettablebyID(int id){	
+	return dao.fetch(DbTable.class,id);	
+}
+
+
+
+
+
 }

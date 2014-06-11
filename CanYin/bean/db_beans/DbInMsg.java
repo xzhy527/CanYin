@@ -10,6 +10,7 @@ public class DbInMsg extends WxInMsg implements Cloneable{
 	private Date intime;	
 	private String adminmanage;
 	private String reserve;
+	
 	public DbInMsg(){
 		
 	}

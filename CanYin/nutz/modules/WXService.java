@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.nutz.castor.castor.Object2Map;
+import org.nutz.dao.Cnd;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
 import org.nutz.lang.Lang;
@@ -16,6 +17,7 @@ import org.nutz.weixin.impl.BasicWxHandler;
 import org.nutz.weixin.util.Wxs;
 
 import db_beans.DbInMsg;
+import db_beans.DbUser;
 import tools.MyDao;
 @IocBean(name="wxHandler", args={"smartmenu"})
 public class WXService extends BasicWxHandler {
@@ -35,8 +37,18 @@ public class WXService extends BasicWxHandler {
 		return super.handle(in);
 	}
 	public WxOutMsg text(WxInMsg msg) {
+		String msgstr=msg.getContent();
 		if ("kt".equals(msg.getContent())){
-			return Wxs.respNews(null, new WxArticle("请进行开台操作","欢迎开台","http://yf.ngrok.com/images/kt3.png","http://yf.ngrok.com"));
+			
+			DbUser ubean = dao.fetch(DbUser.class,Cnd.where("WxID","=",msg.getFromUserName()));
+			if(ubean==null){
+				return Wxs.respNews(null, new WxArticle("请进行开台操作","欢迎开台","http://yf.ngrok.com/images/kt3.png","http://yf.ngrok.com/userlogin.html"));
+			}else{
+				return Wxs.respNews(null, new WxArticle("请进行开台操作","欢迎开台","http://yf.ngrok.com/images/kt3.png","http://yf.ngrok.com/kt.jsp"));
+			}		
+		}
+		if("dl".equals(msgstr)){
+			return Wxs.respNews(null, new WxArticle("请进行开台操作","欢迎开台","http://yf.ngrok.com/images/kt3.png","http://yf.ngrok.com/userlogin.html"));
 		}
 		return defaultMsg(msg);
 	}
