@@ -92,24 +92,44 @@ public Object gettabletype(){
 }
 @At()
 @Ok("json")
-public Object gettables(String pos,String type,String state,String alias){
+public Object gettables(String pos[],String type[],String state,String alias){
 	
-	String sqltext="";	
-	if(!Strings.isBlank(pos)){
-		sqltext+="position='"+pos+"' and ";
+	String sqltext="";
+	if(pos!=null&&pos.length>0){
+		String sstr="position in (";
+		for(int i=0;i<pos.length;i++){
+			sstr+="'"+pos[i]+"',";
+		}
+		sstr=sstr.substring(0,sstr.length()-1);
+		sstr+=") and ";
+		sqltext+=sstr;
 	}
-	if(!Strings.isBlank(type)){
-		sqltext+="type='"+type+"' and ";
+	if(type!=null&&type.length>0){
+		String sstr="type in (";
+		for(int i=0;i<type.length;i++){
+			sstr+="'"+type[i]+"',";
+		}
+		sstr=sstr.substring(0,sstr.length()-1);
+		sstr+=") and ";
+		sqltext+=sstr;
 	}
+	
+//	if(!Strings.isBlank(pos)){
+//		sqltext+="position='"+pos+"' and ";
+//	}
+//	if(!Strings.isBlank(type)){
+//		sqltext+="type='"+type+"' and ";
+//	}
 	if(!Strings.isBlank(state)){
 		sqltext+="state='"+state+"' and ";
 	}
 	if(!Strings.isBlank(alias)){
-		sqltext+="state like '%"+state+"'% and ";
+		sqltext+="alias like '%"+alias+"'% and ";
 	}
 	if(sqltext.length()>0){
 		sqltext=" where "+ sqltext.substring(0,sqltext.length()-5);
 	}
+	System.out.println("select * from db_Table "+sqltext);
 	List<DbTable> beans = dao.query("select * from db_Table "+sqltext);	
 	return beans;
 }

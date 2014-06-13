@@ -31,6 +31,7 @@ padding: 1px;
 }
 .ui-icon-buy {
 	background:url('/images/gwc.png') no-repeat 0 0;
+			      </li>
 	width: 29px;
 	height:27px;
 }
@@ -45,9 +46,8 @@ padding: 1px;
     <a data-icon="buy" data-iconpos="notext" data-corners="false" data=shadow="false"> 2 </a>
 </div>
 		<div class="content_left">
-	<form method="post" action="demoform.asp">
+	<form method="post" action="gettables.do">
       <fieldset data-role="controlgroup" id="tablepos">
-		
       </fieldset>
 	</form>
 		
@@ -59,49 +59,70 @@ padding: 1px;
  		 -->
 		</div>
 		
-		<div class="content_right">
-			    <ul data-role="listview" data-inset="false">
-      <li>
-        <a href="#">
-        <img src="http://www.w3school.com.cn/i/chrome.png">
-        <h2>Google Chrome</h2>
-        <p>Google Chrome is a free, open-source web browser. Released in 2008.</p>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-        <img src="http://cmyy.qqwcb.com/app/public/14-01/1390353175_a.jpg" width=75 height=75>
-        <h2>Mozilla Firefox</h2>
-        <p>Firefox is a web browser from Mozilla. Released in 2004.</p>
-        </a>
-        <a href="#">sf</a>
-      </li>
-    </ul>
-		</div>
+		<div class="content_right" id="showtables">
+			  <ul data-role="listview" data-inset="false">
+			  	 <li>fdsafdsa</li>
+	
+			      <li>
+			        <a href="#">
+			        	<img src="images/6rt.png" width=75 height=75>
+			        	<h1>你好</h1>
+			        	<p>sdf</p>	
+			        </a>
+			      </li> 
+	         </ul>
+      </div>
 </div>
 </body>
 
 <script type="text/javascript">
-var pos="";
-var type="";
 $(function(){
     $.getJSON("gettablepos.do",function(json){    	
     	for(var i=0;i<json.length;i++){
-    		var _elem=$("<label for='"+json[i].charvalue+"'>"+json[i].charvalue+"</label>"+"<input type='checkbox' name='pos' id='"+json[i].charvalue+"' value='"+json[i].charvalue+"'>");    		
+    		var _elem=$("<label for='"+json[i].charvalue+"'>"+json[i].charvalue+"</label>"+"<input type='checkbox' name='pos' id='"+json[i].charvalue+"' value='"+json[i].charvalue+"' onclick='readtable()'>");    		
     		$("#tablepos").append(_elem);
     	}
     	$("#tablepos").trigger("create");
 	});
     $.getJSON("gettabletype.do",function(json){    	
     	for(var i=0;i<json.length;i++){
-    		var _elem=$("<label for='"+json[i].charvalue+"'>"+json[i].charvalue+"</label>"+"<input type='checkbox' name='type' id='"+json[i].charvalue+"' value='"+json[i].charvalue+"'>");    		
+    		var _elem=$("<label for='"+json[i].charvalue+"'>"+json[i].charvalue+"</label>"+"<input type='checkbox' name='type' id='"+json[i].charvalue+"' value='"+json[i].charvalue+"' onclick='readtable()'>");    		
     		$("#tablepos").append(_elem);
     	}
     	$("#tablepos").trigger("create");
 	});
-})
-function readtable(pos,type){
-   
+});
+function readtable(){
+	var formparam=$("form").serialize();
+	
+	$.post("gettables.do",formparam,function(json){
+	/*	
+	      <li>
+	        <a href="#">
+	        	<img src="images/6rt.png" width=75 height=75>
+	        	<h1>你好</h1>
+	        	<p>sdf</p>	
+	        </a>
+	      </li> 
+		
+		*/
+			$("#showtables").html("");
+			var $ul=$("<ul data-role='listview' data-inset='false'></ul>");
+			
+			for(var i=0;i<json.length;i++){
+				/* 对桌台的业务判读以及分类处理说明*/
+				var $li=$('<li><a href="#">'
+				+'<img src="images/6rt.png" width=75 height=75>'
+				+'<h1>'+json[i].tablename+'</h1>'
+				+'<p>'+json[i].starttime+'</p>'
+				+'</a></li>');				
+				$ul.append($li);	
+			}
+			$("#showtables").html($ul);
+		   $("ul").listview();   
+			//$ul.listview("refresh");
+			
+	},"json");	
 }
 
 
