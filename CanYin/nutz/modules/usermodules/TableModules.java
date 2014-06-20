@@ -1,8 +1,6 @@
 package modules.usermodules;
-
 import java.util.Date;
 import java.util.List;
-
 import org.nutz.dao.Chain;
 import org.nutz.dao.Cnd;
 import org.nutz.ioc.aop.Aop;

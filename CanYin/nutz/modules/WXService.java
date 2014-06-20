@@ -44,7 +44,7 @@ public class WXService extends BasicWxHandler {
 			if(ubean==null){
 				return Wxs.respNews(null, new WxArticle("请进行开台操作","欢迎开台","http://yf.ngrok.com/images/kt3.png","http://yf.ngrok.com/userlogin.html"));
 			}else{
-				return Wxs.respNews(null, new WxArticle("请进行开台操作","欢迎开台","http://yf.ngrok.com/images/kt3.png","http://yf.ngrok.com/kt.jsp"));
+				return Wxs.respNews(null, new WxArticle("请进行开台操作","欢迎开台","http://yf.ngrok.com/images/kt3.png","http://yf.ngrok.com/kt.html"));
 			}		
 		}
 		if("dl".equals(msgstr)){

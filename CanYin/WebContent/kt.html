@@ -12,12 +12,12 @@
 .ui-block-b, 
 .ui-block-c 
 {
-background-color: lightgray;
-border: 1px solid black;
-height: 100px;
-font-weight: bold;
-text-align: center;
-padding: 1px;
+	background-color: lightgray;
+	border: 1px solid black;
+	height: 100px;
+	font-weight: bold;
+	text-align: center;
+	padding: 1px;
 }
 .content_left{
 	float: left;
@@ -46,7 +46,7 @@ padding: 1px;
     <ul data-role="listview" data-inset="false">
         {{each list as value i}}
         <li>
-            <a href="#">
+            <a href="#" id="{{value.id}}" state="{{value.state}}" onclick="gowhich(this);false;">
                 <img src="images/tbimage_{{value.type}}.png" width=75 height=75>
                 <h1>{{value.tablename}}</h1>
                  <p>{{value.starttime}}</p>
@@ -70,9 +70,68 @@ padding: 1px;
          </form>
 	</div>
 	<div class="content_right" id="showtables">
+    </div>
+</div>
 
+<div id="ktoption" data-role="page" data-position="fixed" >
+
+  <div data-theme="b" data-role="header">
+    <a data-icon="home" data-iconpos="left" >店名:长春小巷食府</a>
+    <h1></h1>
+  <a data-icon="buy" data-iconpos="notext" data-corners="false" data=shadow="false"> 2 </a>
 
 	</div>
+<div data-role="content">
+
+<form action="">
+	<input type="hidden" name="">
+	<input type="hidden" name="">
+	<input type="hidden" name="">
+	<table>
+		<tr>
+			<td><label for="tablepos" style="width: 70px">桌台区域</label></td>
+			<td><input type="text" name="tablepos" size="10"
+				id="tablepos" data-mini="true" readonly="readonly"></td>
+		</tr>
+		<tr>
+			<td><label for="tabletype">桌台类型</label></td>
+			<td><input type="text" name="tabletype" readonlyid="tabletype"></td>
+		</tr>
+		<tr>
+			<td><label for="tabletype">人数</label></td>
+			<td><input type="text" name="tabletype" readonly id="tabletype"></td>
+		</tr>
+		<tr>
+			<td><label for="tabletype">服务员</label></td>
+			<td><input type="text" name="tabletype" readonly id="tabletype"></td>
+		</tr>
+		<tr>
+			<td><label for="tabletype">客户来宾</label></td>
+			<td><input type="text" name="tabletype" readonly id="tabletype"></td>
+		</tr>
+		<tr>
+			<td><label for="tabletype">营销经理</label></td>
+			<td><input type="text" name="tabletype" readonly id="tabletype"></td>
+		</tr>
+		<tr>
+			<td><label for="tabletype">押金</label></td>
+			<td><input type="text" name="tabletype" readonly id="tabletype"></td>
+		</tr>
+		<tr>
+			<td><label for="tabletype">备注</label></td>
+			<td><input type="text" name="tabletype" readonly id="tabletype"></td>
+		</tr>
+
+	</table>
+	<div data-role="controlgroup" data-type="horizontal" align="center">
+		<a data-role="button"> 提 交  </a>
+		
+		<a data-role="button">   返 回   </a>
+	</div>
+	
+</form>
+
+</div>
 </div>
 </body>
 
@@ -97,10 +156,8 @@ $(function(){
         $("#tablepos").append(html);
         $("#tablepos").trigger("create");
 	});
-
 });
 function readtable(){
-
     var formparam=$("form").serialize();
     $.post("gettables.do",formparam,function(json){
         var tabledata={
@@ -111,8 +168,19 @@ function readtable(){
         $("#showtables ul").listview();
     },"json");
 }
+
+function gowhich(elem){
+	var id=$(elem).attr("id");
+	
+	$.post("gettablebyID.do","id="+id,function(json){
+		if(json.state=="空闲"){
+			//$.mobile.activePage("#ktoption")
+			//$("#page1").hide();
+			//$("#ktoption").show();
+			
+			$.mobile.changePage('#ktoption');
+		}
+	},"json");
+}
 </script>
-
-
-
 </html>

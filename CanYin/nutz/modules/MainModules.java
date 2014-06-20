@@ -1,7 +1,6 @@
 package modules;
 
 import java.util.Date;
-
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
 import org.nutz.lang.Strings;
@@ -35,6 +34,7 @@ public class MainModules {
 		return paramstr+1;
 	}
 	public Object getnow(){
+		System.out.println("fsda12345");
 		return new Date();
 	}
 }
