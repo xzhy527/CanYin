@@ -2,8 +2,6 @@ package db_beans;
 import java.io.Serializable;
 import java.util.Date;
 
-import org.nutz.dao.entity.annotation.Id;
-import org.nutz.dao.entity.annotation.Name;
 import org.nutz.dao.entity.annotation.Table;
 
 /**
@@ -19,24 +17,19 @@ public class DbUser implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/** ID. */
-	@Id
-	private int id;
+	private Integer id;
 
 	/** GroupID. */
-	private int groupid;
+	private Integer groupid;
 
 	/** LoginName. */
-	@Name
 	private String loginname;
 
 	/** LoginPWD. */
 	private String loginpwd;
 
-	/** CreatTime. */
-	private Date creattime;
-
-	/** employID. */
-	private int employid;
+	/** ShowName. */
+	private String showname;
 
 	/** LoginIP. */
 	private String loginip;
@@ -45,12 +38,26 @@ public class DbUser implements Serializable {
 	private Date lasttime;
 
 	/** Status. */
-	private int status;
+	private Integer status;
+
+	/** WxID. */
+	private String wxid;
+
+	/** ContactInfo. */
+	private String contactinfo;
+
+	/** CreatTime. */
+	private Date creattime;
+
+	/** CardID. */
+	private String cardid;
+
+	/** UserType. */
+	private String usertype;
 
 	/**
 	 * Constructor.
 	 */
-	private String wxID;
 	public DbUser() {
 	}
 
@@ -131,41 +138,22 @@ public class DbUser implements Serializable {
 	}
 
 	/**
-	 * Set the CreatTime.
+	 * Set the ShowName.
 	 * 
-	 * @param creattime
-	 *            CreatTime
+	 * @param showname
+	 *            ShowName
 	 */
-	public void setCreattime(Date creattime) {
-		this.creattime = creattime;
+	public void setShowname(String showname) {
+		this.showname = showname;
 	}
 
 	/**
-	 * Get the CreatTime.
+	 * Get the ShowName.
 	 * 
-	 * @return CreatTime
+	 * @return ShowName
 	 */
-	public Date getCreattime() {
-		return this.creattime;
-	}
-
-	/**
-	 * Set the employID.
-	 * 
-	 * @param employid
-	 *            employID
-	 */
-	public void setEmployid(Integer employid) {
-		this.employid = employid;
-	}
-
-	/**
-	 * Get the employID.
-	 * 
-	 * @return employID
-	 */
-	public Integer getEmployid() {
-		return this.employid;
+	public String getShowname() {
+		return this.showname;
 	}
 
 	/**
@@ -225,14 +213,135 @@ public class DbUser implements Serializable {
 		return this.status;
 	}
 
-	public String getWxID() {
-		return wxID;
+	/**
+	 * Set the WxID.
+	 * 
+	 * @param wxid
+	 *            WxID
+	 */
+	public void setWxid(String wxid) {
+		this.wxid = wxid;
 	}
 
-	public void setWxID(String wxID) {
-		this.wxID = wxID;
+	/**
+	 * Get the WxID.
+	 * 
+	 * @return WxID
+	 */
+	public String getWxid() {
+		return this.wxid;
 	}
 
+	/**
+	 * Set the ContactInfo.
+	 * 
+	 * @param contactinfo
+	 *            ContactInfo
+	 */
+	public void setContactinfo(String contactinfo) {
+		this.contactinfo = contactinfo;
+	}
 
+	/**
+	 * Get the ContactInfo.
+	 * 
+	 * @return ContactInfo
+	 */
+	public String getContactinfo() {
+		return this.contactinfo;
+	}
+
+	/**
+	 * Set the CreatTime.
+	 * 
+	 * @param creattime
+	 *            CreatTime
+	 */
+	public void setCreattime(Date creattime) {
+		this.creattime = creattime;
+	}
+
+	/**
+	 * Get the CreatTime.
+	 * 
+	 * @return CreatTime
+	 */
+	public Date getCreattime() {
+		return this.creattime;
+	}
+
+	/**
+	 * Set the CardID.
+	 * 
+	 * @param cardid
+	 *            CardID
+	 */
+	public void setCardid(String cardid) {
+		this.cardid = cardid;
+	}
+
+	/**
+	 * Get the CardID.
+	 * 
+	 * @return CardID
+	 */
+	public String getCardid() {
+		return this.cardid;
+	}
+
+	/**
+	 * Set the UserType.
+	 * 
+	 * @param usertype
+	 *            UserType
+	 */
+	public void setUsertype(String usertype) {
+		this.usertype = usertype;
+	}
+
+	/**
+	 * Get the UserType.
+	 * 
+	 * @return UserType
+	 */
+	public String getUsertype() {
+		return this.usertype;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		DbUser other = (DbUser) obj;
+		if (id == null) {
+			if (other.id != null) {
+				return false;
+			}
+		} else if (!id.equals(other.id)) {
+			return false;
+		}
+		return true;
+	}
 
 }

@@ -74,31 +74,6 @@ CREATE TABLE db_account
 );
 
 
-CREATE TABLE db_table
-(
-	ID int NOT NULL IDENTITY ,
-	-- 别名
-	alias varchar(20),
-	tablename varchar(20),
-	type varchar(20),
-	position varchar(20),
-	limit float,
-	allow int,
-	state varchar(20),
-	isorder int,
-	SalesID int,
-	waiter varchar(20),
-	Prepay float,
-	starttime smalldatetime,
-	finishtime smalldatetime,
-	desrc varchar(200),
-	reserve varchar(100),
-	permission int,
-	tableIndex varbinary(20),
-	PRIMARY KEY (ID)
-);
-
-
 CREATE TABLE db_optlog
 (
 	ID int,
@@ -132,21 +107,6 @@ CREATE TABLE db_order
 );
 
 
-CREATE TABLE db_user
-(
-	ID int NOT NULL IDENTITY ,
-	GroupID int,
-	LoginName varchar(20),
-	LoginPWD varchar(20),
-	CreatTime smalldatetime,
-	EmployID int,
-	LoginIP varchar(20),
-	LastTime smalldatetime,
-	Status int,
-	PRIMARY KEY (ID)
-);
-
-
 CREATE TABLE db_permission
 (
 	ID int NOT NULL IDENTITY ,
@@ -173,6 +133,51 @@ CREATE TABLE db_Config
 	IntValue int,
 	Descr varchar(100),
 	Reserved varchar(200),
+	PRIMARY KEY (ID)
+);
+
+
+CREATE TABLE db_table
+(
+	ID int NOT NULL IDENTITY ,
+	-- 别名
+	Alias varchar(20),
+	TableName varchar(20),
+	TableType varchar(20),
+	Position varchar(20),
+	Limit float,
+	AllowPeople int,
+	State varchar(20),
+	IsOrder int,
+	SalesID varchar(100),
+	waiter varchar(20),
+	Prepay float,
+	StartTime smalldatetime,
+	FinishTime smalldatetime,
+	Desrc varchar(200),
+	Reserve varchar(100),
+	Permission int,
+	UserID int,
+	PRIMARY KEY (ID)
+);
+
+
+CREATE TABLE db_user
+(
+	ID int NOT NULL IDENTITY ,
+	GroupID int,
+	LoginName varchar(20),
+	LoginPWD varchar(20),
+	ShowName varchar(50),
+	LoginIP varchar(20),
+	LastTime smalldatetime,
+	Status int,
+	WxID varchar(100),
+	-- 联系方式
+	ContactInfo varchar(200),
+	CreatTime smalldatetime,
+	CardID varchar(100),
+	UserType varchar(50),
 	PRIMARY KEY (ID)
 );
 

@@ -41,7 +41,7 @@ padding: 1px;
 <body>
 <div data-role="page" data-position="fixed" id="page1">
 <div data-theme="b" data-role="header">
-    <a data-icon="home" data-iconpos="left" >店名:长春食府</a>
+    <a data-icon="home" data-iconpos="left" >店名:长春小巷食府</a>
     <h1></h1>
     <a data-icon="buy" data-iconpos="notext" data-corners="false" data=shadow="false"> 2 </a>
 </div>

@@ -1,8 +1,12 @@
 package modules.usermodules;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.nutz.dao.Cnd;
+import org.nutz.dao.Condition;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
 import org.nutz.lang.Strings;
@@ -12,7 +16,11 @@ import org.nutz.mvc.annotation.Ok;
 import org.nutz.mvc.view.JspView;
 import org.nutz.mvc.view.ViewWrapper;
 
+import com.sun.xml.internal.ws.util.StringUtils;
+
 import tools.MyDao;
+import tools.MyLong;
+import db_beans.DbConfig;
 import db_beans.DbOptlog;
 import db_beans.DbUser;
 import debeans.AjaxJSON;
@@ -21,7 +29,7 @@ public class UserModules {
 	@Inject	
 	MyDao dao;	
 @At()
-public View login_Base(String loginName,String loginPWD,HttpSession session){	
+public View login_Base(String loginName,String loginPWD,HttpSession session){		
 	if(Strings.isBlank(loginName)||Strings.isBlank(loginPWD))
 		return AjaxJSON.AjaxJSON("登陆信息不符合规则", null);
 	
@@ -65,6 +73,17 @@ public Object wxlogin(String loginname,String loginpassword,HttpSession session,
 	}else{
 		return new AjaxJSON("密码错误，请重试！");
 	}
+	
+}
+@At()
+@Ok("json")
+public Object getuserList(String userType[],String groupid){
+	HashMap<String, Object> sqlmapMap=new HashMap<String, Object>();	
+	sqlmapMap.put("UserType", userType);
+	sqlmapMap.put("GroupID", groupid);
+	Condition cond = Cnd.wrap(MyLong.sqltext(sqlmapMap));
+	return dao.query(DbUser.class, cond);
+	
 	
 }
 

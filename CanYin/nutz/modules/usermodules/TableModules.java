@@ -1,6 +1,8 @@
 package modules.usermodules;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+
 import org.nutz.dao.Chain;
 import org.nutz.dao.Cnd;
 import org.nutz.ioc.aop.Aop;
@@ -30,10 +32,20 @@ public class TableModules {
  * @param dataType
  * @return
  */	
-@Aop("canYinInterceptor")	
+//@Aop("canYinInterceptor")	
 @At()
 @Ok("json")
-	public Object startTable(int waiter,int ID,int persons,String dataType){
+	public Object startTable(
+			int waiter,
+			int ID,
+			int persons,
+			String position,
+			String type,
+			int allow,
+			int userid,
+			String prepay,
+			String desrc,
+			String dataType){
 		if(ID<1){
 			return new AjaxJSON("ID不能为空",500);
 		}
@@ -41,7 +53,6 @@ public class TableModules {
 			return new AjaxJSON("服务员信息不足",500);
 		}		
 		//权限转移到AOP去处理
-
 		if(dao.getpermisson(waiter,"KT")<1){
 			return new AjaxJSON("对不起，您没有开台的权限",502);
 		}
@@ -60,7 +71,7 @@ public class TableModules {
 			tablebean.setState("使用中");
 			tablebean.setStarttime(new java.sql.Date(new java.util.Date().getTime()));
 			tablebean.setWaiter(waiter);
-			tablebean.setAllow(persons);
+			tablebean.setAllowpeople(persons);
 			tablebean.setSalesid(MyLong.gen_SaleID());
 			dao.update(tablebean);
 			DbOptlog dblog = new DbOptlog();
@@ -92,6 +103,16 @@ public Object gettabletype(){
 @Ok("json")
 public Object gettables(String pos[],String type[],String state,String alias){
 	
+	HashMap<String, Object> sqlmapMap=new HashMap<String, Object>();
+	sqlmapMap.put("position", pos);
+	sqlmapMap.put("tabletype", type);
+	sqlmapMap.put("alias", alias);
+	String sqltext=MyLong.sqltext(sqlmapMap);
+	if(sqltext.length()>0){
+		sqltext=" where "+sqltext;
+	}
+	
+	/*
 	String sqltext="";
 	if(pos!=null&&pos.length>0){
 		String sstr="position in (";
@@ -103,7 +124,7 @@ public Object gettables(String pos[],String type[],String state,String alias){
 		sqltext+=sstr;
 	}
 	if(type!=null&&type.length>0){
-		String sstr="type in (";
+		String sstr="tabletype in (";
 		for(int i=0;i<type.length;i++){
 			sstr+="'"+type[i]+"',";
 		}
@@ -128,6 +149,11 @@ public Object gettables(String pos[],String type[],String state,String alias){
 		sqltext=" where "+ sqltext.substring(0,sqltext.length()-5);
 	}
 	System.out.println("select * from db_Table "+sqltext);
+	
+	*/
+	
+	
+	
 	List<DbTable> beans = dao.query("select * from db_Table "+sqltext);	
 	return beans;
 }

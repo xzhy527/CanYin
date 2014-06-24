@@ -5,16 +5,23 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.eclipse.jdt.internal.compiler.ast.ThisReference;
 import org.nutz.dao.Cnd;
 import org.nutz.dao.Condition;
+import org.nutz.dao.Dao;
 import org.nutz.dao.Sqls;
+import org.nutz.dao.entity.Entity;
 import org.nutz.dao.entity.Record;
 import org.nutz.dao.impl.NutDao;
+import org.nutz.dao.jdbc.ValueAdaptor;
+import org.nutz.dao.sql.Pojo;
 import org.nutz.dao.sql.Sql;
 import org.nutz.dao.sql.SqlCallback;
+import org.nutz.dao.util.cri.SqlExpression;
 import org.nutz.lang.Strings;
 
 import db_beans.DbConfig;
@@ -92,8 +99,10 @@ public class MyDao extends NutDao {
 	  if(pbean==null){
 		  return 0;
 	  }
+	 
 	 return  pbean.getPermValue();
   }
 
-  
+
+
 }

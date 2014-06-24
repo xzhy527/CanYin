@@ -1,6 +1,6 @@
 package db_beans;
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import org.nutz.dao.entity.annotation.Id;
 import org.nutz.dao.entity.annotation.Table;
@@ -21,53 +21,56 @@ public class DbTable implements Serializable {
 	@Id
 	private Integer id;
 
-	/** alias. */
+	/** Alias. */
 	private String alias;
 
-	/** tablename. */
+	/** TableName. */
 	private String tablename;
 
-	/** type. */
-	private String type;
+	/** TableType. */
+	private String tabletype;
 
-	/** position. */
+	/** Position. */
 	private String position;
 
-	/** limit. */
+	/** Limit. */
 	private Float limit;
 
-	/** allow. */
-	private Integer allow;
+	/** AllowPeople. */
+	private Integer allowpeople;
 
-	/** state. */
+	/** State. */
 	private String state;
 
-	/** isorder. */
+	/** IsOrder. */
 	private Integer isorder;
 
 	/** SalesID. */
 	private String salesid;
 
 	/** waiter. */
-	private Integer waiter;
+	private String waiter;
 
-	/** prepay. */
+	/** Prepay. */
 	private Float prepay;
 
-	/** starttime. */
+	/** StartTime. */
 	private Date starttime;
 
-	/** finishtime. */
+	/** FinishTime. */
 	private Date finishtime;
 
-	/** desrc. */
+	/** Desrc. */
 	private String desrc;
 
-	/** reserve. */
+	/** Reserve. */
 	private String reserve;
 
-	/** permission. */
+	/** Permission. */
 	private Integer permission;
+
+	/** UserID. */
+	private Integer userid;
 
 	/**
 	 * Constructor.
@@ -95,152 +98,152 @@ public class DbTable implements Serializable {
 	}
 
 	/**
-	 * Set the alias.
+	 * Set the Alias.
 	 * 
 	 * @param alias
-	 *            alias
+	 *            Alias
 	 */
 	public void setAlias(String alias) {
 		this.alias = alias;
 	}
 
 	/**
-	 * Get the alias.
+	 * Get the Alias.
 	 * 
-	 * @return alias
+	 * @return Alias
 	 */
 	public String getAlias() {
 		return this.alias;
 	}
 
 	/**
-	 * Set the tablename.
+	 * Set the TableName.
 	 * 
 	 * @param tablename
-	 *            tablename
+	 *            TableName
 	 */
 	public void setTablename(String tablename) {
 		this.tablename = tablename;
 	}
 
 	/**
-	 * Get the tablename.
+	 * Get the TableName.
 	 * 
-	 * @return tablename
+	 * @return TableName
 	 */
 	public String getTablename() {
 		return this.tablename;
 	}
 
 	/**
-	 * Set the type.
+	 * Set the TableType.
 	 * 
-	 * @param type
-	 *            type
+	 * @param tabletype
+	 *            TableType
 	 */
-	public void setType(String type) {
-		this.type = type;
+	public void setTabletype(String tabletype) {
+		this.tabletype = tabletype;
 	}
 
 	/**
-	 * Get the type.
+	 * Get the TableType.
 	 * 
-	 * @return type
+	 * @return TableType
 	 */
-	public String getType() {
-		return this.type;
+	public String getTabletype() {
+		return this.tabletype;
 	}
 
 	/**
-	 * Set the position.
+	 * Set the Position.
 	 * 
 	 * @param position
-	 *            position
+	 *            Position
 	 */
 	public void setPosition(String position) {
 		this.position = position;
 	}
 
 	/**
-	 * Get the position.
+	 * Get the Position.
 	 * 
-	 * @return position
+	 * @return Position
 	 */
 	public String getPosition() {
 		return this.position;
 	}
 
 	/**
-	 * Set the limit.
+	 * Set the Limit.
 	 * 
 	 * @param limit
-	 *            limit
+	 *            Limit
 	 */
 	public void setLimit(Float limit) {
 		this.limit = limit;
 	}
 
 	/**
-	 * Get the limit.
+	 * Get the Limit.
 	 * 
-	 * @return limit
+	 * @return Limit
 	 */
 	public Float getLimit() {
 		return this.limit;
 	}
 
 	/**
-	 * Set the allow.
+	 * Set the AllowPeople.
 	 * 
-	 * @param allow
-	 *            allow
+	 * @param allowpeople
+	 *            AllowPeople
 	 */
-	public void setAllow(Integer allow) {
-		this.allow = allow;
+	public void setAllowpeople(Integer allowpeople) {
+		this.allowpeople = allowpeople;
 	}
 
 	/**
-	 * Get the allow.
+	 * Get the AllowPeople.
 	 * 
-	 * @return allow
+	 * @return AllowPeople
 	 */
-	public Integer getAllow() {
-		return this.allow;
+	public Integer getAllowpeople() {
+		return this.allowpeople;
 	}
 
 	/**
-	 * Set the state.
+	 * Set the State.
 	 * 
 	 * @param state
-	 *            state
+	 *            State
 	 */
 	public void setState(String state) {
 		this.state = state;
 	}
 
 	/**
-	 * Get the state.
+	 * Get the State.
 	 * 
-	 * @return state
+	 * @return State
 	 */
 	public String getState() {
 		return this.state;
 	}
 
 	/**
-	 * Set the isorder.
+	 * Set the IsOrder.
 	 * 
 	 * @param isorder
-	 *            isorder
+	 *            IsOrder
 	 */
 	public void setIsorder(Integer isorder) {
 		this.isorder = isorder;
 	}
 
 	/**
-	 * Get the isorder.
+	 * Get the IsOrder.
 	 * 
-	 * @return isorder
+	 * @return IsOrder
 	 */
 	public Integer getIsorder() {
 		return this.isorder;
@@ -256,6 +259,7 @@ public class DbTable implements Serializable {
 		this.salesid = salesid;
 	}
 
+
 	/**
 	 * Get the SalesID.
 	 * 
@@ -268,11 +272,19 @@ public class DbTable implements Serializable {
 	/**
 	 * Set the waiter.
 	 * 
-	 * @param water
+	 * @param waiter
 	 *            waiter
 	 */
-	public void setWaiter(Integer waiter) {
+	public void setWaiter(String waiter) {
 		this.waiter = waiter;
+	}
+	public void setWaiter(int waiter) {
+		/*
+		 * waiter dd=new waiter()
+		 * this.waiter =dd.getwaitername();
+		 */
+		
+		this.waiter = String.valueOf(waiter);
 	}
 
 	/**
@@ -280,122 +292,141 @@ public class DbTable implements Serializable {
 	 * 
 	 * @return waiter
 	 */
-	public Integer getWaiter() {
+	public String getWaiter() {
 		return this.waiter;
 	}
 
 	/**
-	 * Set the prepay.
+	 * Set the Prepay.
 	 * 
 	 * @param prepay
-	 *            prepay
+	 *            Prepay
 	 */
 	public void setPrepay(Float prepay) {
 		this.prepay = prepay;
 	}
 
 	/**
-	 * Get the prepay.
+	 * Get the Prepay.
 	 * 
-	 * @return prepay
+	 * @return Prepay
 	 */
 	public Float getPrepay() {
 		return this.prepay;
 	}
 
 	/**
-	 * Set the starttime.
+	 * Set the StartTime.
 	 * 
 	 * @param starttime
-	 *            starttime
+	 *            StartTime
 	 */
 	public void setStarttime(Date starttime) {
 		this.starttime = starttime;
 	}
 
 	/**
-	 * Get the starttime.
+	 * Get the StartTime.
 	 * 
-	 * @return starttime
+	 * @return StartTime
 	 */
 	public Date getStarttime() {
 		return this.starttime;
 	}
 
 	/**
-	 * Set the finishtime.
+	 * Set the FinishTime.
 	 * 
 	 * @param finishtime
-	 *            finishtime
+	 *            FinishTime
 	 */
 	public void setFinishtime(Date finishtime) {
 		this.finishtime = finishtime;
 	}
 
 	/**
-	 * Get the finishtime.
+	 * Get the FinishTime.
 	 * 
-	 * @return finishtime
+	 * @return FinishTime
 	 */
 	public Date getFinishtime() {
 		return this.finishtime;
 	}
 
 	/**
-	 * Set the desrc.
+	 * Set the Desrc.
 	 * 
 	 * @param desrc
-	 *            desrc
+	 *            Desrc
 	 */
 	public void setDesrc(String desrc) {
 		this.desrc = desrc;
 	}
 
 	/**
-	 * Get the desrc.
+	 * Get the Desrc.
 	 * 
-	 * @return desrc
+	 * @return Desrc
 	 */
 	public String getDesrc() {
 		return this.desrc;
 	}
 
 	/**
-	 * Set the reserve.
+	 * Set the Reserve.
 	 * 
 	 * @param reserve
-	 *            reserve
+	 *            Reserve
 	 */
 	public void setReserve(String reserve) {
 		this.reserve = reserve;
 	}
 
 	/**
-	 * Get the reserve.
+	 * Get the Reserve.
 	 * 
-	 * @return reserve
+	 * @return Reserve
 	 */
 	public String getReserve() {
 		return this.reserve;
 	}
 
 	/**
-	 * Set the permission.
+	 * Set the Permission.
 	 * 
 	 * @param permission
-	 *            permission
+	 *            Permission
 	 */
 	public void setPermission(Integer permission) {
 		this.permission = permission;
 	}
 
 	/**
-	 * Get the permission.
+	 * Get the Permission.
 	 * 
-	 * @return permission
+	 * @return Permission
 	 */
 	public Integer getPermission() {
 		return this.permission;
+	}
+
+	/**
+	 * Set the UserID.
+	 * 
+	 * @param userid
+	 *            UserID
+	 */
+	public void setUserid(Integer userid) {
+		this.userid = userid;
+	}
+
+	/**
+	 * Get the UserID.
+	 * 
+	 * @return UserID
+	 */
+	public Integer getUserid() {
+		return this.userid;
 	}
 
 	/**
