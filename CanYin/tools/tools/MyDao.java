@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,10 +37,7 @@ public class MyDao extends NutDao {
 }
   public List query(String sqltext){
 	  Sql sql=Sqls.create(sqltext);
-	  
-	  
-	  sql.setCallback(new SqlCallback() {
-		
+	  sql.setCallback(new SqlCallback() {		
 		@Override
 		public Object invoke(Connection conn, ResultSet rs, Sql sql)
 				throws SQLException {
@@ -47,8 +45,6 @@ public class MyDao extends NutDao {
 			while(rs.next()){				
 				re.add(Record.create(rs));				
 			}
-			
-			
 			return re;
 		}
 	});	  
@@ -72,27 +68,43 @@ public class MyDao extends NutDao {
 	  this.execute(sql);	  
 	  return (Integer) sql.getResult();	  
   }
-  public int getConfig(String name,String type){
-	 Condition cond=null;
-	 String sqltext="";
-	 if(!Strings.isBlank(name)){
-		 
-		 sqltext+="name='"+name+"' and ";
-	 }
-	 if(!Strings.isBlank(type)){
-		 sqltext+="type='"+type+"' and ";
-	 }
-	 
-	 if(sqltext.length()>1){
-		 sqltext=sqltext.substring(0, sqltext.length()-5);
-		 cond=Cnd.wrap(sqltext);
-	 }
-	  DbConfig configbean = this.fetch(DbConfig.class,cond);
-	  if(configbean==null){
-		  return (Integer) null;
+  
+  /**
+   * 取全局配置项
+   * @param name
+   * @param type
+   * @param intvalue
+   * @param charvalue
+   * @param columnstr
+   * @return
+   */
+  
+  
+  
+  
+  public Object getConfig(String name,String type,Integer intvalue,String charvalue,String columnstr){
+	  Map<String,Object> map = new HashMap<String,Object>();	  
+	  map.put("name", name);
+	  map.put("type", type);
+	  map.put("intvalue", intvalue);
+	  map.put("charvalue", charvalue);
+	  String sqlTextString=MyLong.sqltext(map);
+	  if(sqlTextString!=null)
+		  sqlTextString=" where "+sqlTextString;
+	  List re_t = this.query("select "+columnstr+" from db_config "+sqlTextString);
+	  if(re_t==null)
+		  return null;
+	  if(re_t.size()==1){
+		  //type=<Record>
+		  if("*".equals(columnstr)){
+			  return re_t.get(0);
+		  }else{
+			  Record record = (Record) re_t.get(0);
+			  return record.getString(columnstr);
+		  } 		  
+	  }else{
+		  return re_t;
 	  }
-	  return configbean.getIntvalue();
- 
   }
   public int getpermisson(int userID,String perName){
 	  DbPermission pbean = this.fetch(DbPermission.class,Cnd.where("name","=",perName));

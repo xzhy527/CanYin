@@ -54,10 +54,6 @@ public class MyLong {
              String[] cols =key.split(":");              
              String cstr=cols[0];             
              String signstr=cols.length>1&&cols[1]!=null&&cols[1].length()>0?cols[1]:"=";
-             
-             
-             
-             
              String andor=cols.length>2&&cols[2]!=null&&cols[2].length()>0?cols[2]:"and";            
              if(value instanceof String){           	 
             	 re_sqltextString+=cstr+" "+signstr+" '"+value+"' "+andor+" ";

@@ -182,6 +182,12 @@ function gowhich(elem){
 			$("#position").val(json.position);
 			$("#tableID").val(json.id);
 			
+			$.post("getwaiters.do","GroupName=1",function(json){
+				
+				alert(json);
+			})
+			
+			
 		}
 	},"json");
 }

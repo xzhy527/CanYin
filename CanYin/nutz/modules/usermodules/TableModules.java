@@ -64,8 +64,11 @@ public class TableModules {
 			//Cnd.wrap("where TableID="+ID+"OrderTime>="+new Date()+" order by OrderTime asc");			
 			DbOrder orderbean = dao.fetch(DbOrder.class,Cnd.where("TableID","=",ID).and("State",">",0).and("OrderTime",">=",c_time).asc("OrderTime"));
 			
+			
+			Integer maxtime=(Integer)dao.getConfig("MaxTime", "c_order", null, null, "intvalue");
+			
 			//取全局配置项
-			if((orderbean.getOrdertime().getTime() - c_time.getTime()) > dao.getConfig("MaxTime", "c_order")){				
+			if((orderbean.getOrdertime().getTime() - c_time.getTime()) > maxtime){				
 				return new AjaxJSON("该桌台有预定",500);
 			}
 			tablebean.setState("使用中");
@@ -101,8 +104,7 @@ public Object gettabletype(){
 }
 @At()
 @Ok("json")
-public Object gettables(String pos[],String type[],String state,String alias){
-	
+public Object gettables(String pos[],String type[],String state,String alias){	
 	HashMap<String, Object> sqlmapMap=new HashMap<String, Object>();
 	sqlmapMap.put("position", pos);
 	sqlmapMap.put("tabletype", type);
@@ -110,58 +112,19 @@ public Object gettables(String pos[],String type[],String state,String alias){
 	String sqltext=MyLong.sqltext(sqlmapMap);
 	if(sqltext.length()>0){
 		sqltext=" where "+sqltext;
-	}
-	
-	/*
-	String sqltext="";
-	if(pos!=null&&pos.length>0){
-		String sstr="position in (";
-		for(int i=0;i<pos.length;i++){
-			sstr+="'"+pos[i]+"',";
-		}
-		sstr=sstr.substring(0,sstr.length()-1);
-		sstr+=") and ";
-		sqltext+=sstr;
-	}
-	if(type!=null&&type.length>0){
-		String sstr="tabletype in (";
-		for(int i=0;i<type.length;i++){
-			sstr+="'"+type[i]+"',";
-		}
-		sstr=sstr.substring(0,sstr.length()-1);
-		sstr+=") and ";
-		sqltext+=sstr;
-	}
-	
-//	if(!Strings.isBlank(pos)){
-//		sqltext+="position='"+pos+"' and ";
-//	}
-//	if(!Strings.isBlank(type)){
-//		sqltext+="type='"+type+"' and ";
-//	}
-	if(!Strings.isBlank(state)){
-		sqltext+="state='"+state+"' and ";
-	}
-	if(!Strings.isBlank(alias)){
-		sqltext+="alias like '%"+alias+"'% and ";
-	}
-	if(sqltext.length()>0){
-		sqltext=" where "+ sqltext.substring(0,sqltext.length()-5);
-	}
-	System.out.println("select * from db_Table "+sqltext);
-	
-	*/
-	
-	
-	
+	}	
 	List<DbTable> beans = dao.query("select * from db_Table "+sqltext);	
 	return beans;
 }
+
 @At()
 @Ok("json")
 public Object gettablebyID(int id){	
 	return dao.fetch(DbTable.class,id);	
 }
+
+
+
 
 
 
