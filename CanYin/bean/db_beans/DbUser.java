@@ -2,7 +2,11 @@ package db_beans;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.nutz.dao.entity.annotation.Id;
+import org.nutz.dao.entity.annotation.Name;
 import org.nutz.dao.entity.annotation.Table;
+
+import com.sun.org.apache.bcel.internal.generic.NEW;
 
 /**
  * Model class of db_user.
@@ -12,48 +16,51 @@ import org.nutz.dao.entity.annotation.Table;
  */
 @Table("db_user")
 public class DbUser implements Serializable {
-
 	/** serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-
 	/** ID. */
+	@Id
 	private Integer id;
 
-	/** GroupID. */
+	/** groupID. */
 	private Integer groupid;
 
-	/** LoginName. */
+	/** loginName. */
+	@Name
 	private String loginname;
 
-	/** LoginPWD. */
+	/** loginPWD. */
 	private String loginpwd;
 
-	/** ShowName. */
+	/** showName. */
 	private String showname;
 
-	/** LoginIP. */
+	/** loginIP. */
 	private String loginip;
 
-	/** LastTime. */
+	/** lastTime. */
 	private Date lasttime;
 
-	/** Status. */
+	/** status. */
 	private Integer status;
 
-	/** WxID. */
+	/** wxID. */
 	private String wxid;
 
-	/** ContactInfo. */
+	/** contactInfo. */
 	private String contactinfo;
 
-	/** CreatTime. */
+	/** creatTime. */
 	private Date creattime;
 
-	/** CardID. */
+	/** cardID. */
 	private String cardid;
 
-	/** UserType. */
+	/** userType. */
 	private String usertype;
+
+	/** departmentID. */
+	private Integer departmentid;
 
 	/**
 	 * Constructor.
@@ -81,231 +88,253 @@ public class DbUser implements Serializable {
 	}
 
 	/**
-	 * Set the GroupID.
+	 * Set the groupID.
 	 * 
 	 * @param groupid
-	 *            GroupID
+	 *            groupID
 	 */
 	public void setGroupid(Integer groupid) {
 		this.groupid = groupid;
 	}
 
 	/**
-	 * Get the GroupID.
+	 * Get the groupID.
 	 * 
-	 * @return GroupID
+	 * @return groupID
 	 */
 	public Integer getGroupid() {
 		return this.groupid;
 	}
 
 	/**
-	 * Set the LoginName.
+	 * Set the loginName.
 	 * 
 	 * @param loginname
-	 *            LoginName
+	 *            loginName
 	 */
 	public void setLoginname(String loginname) {
 		this.loginname = loginname;
 	}
 
 	/**
-	 * Get the LoginName.
+	 * Get the loginName.
 	 * 
-	 * @return LoginName
+	 * @return loginName
 	 */
 	public String getLoginname() {
 		return this.loginname;
 	}
 
 	/**
-	 * Set the LoginPWD.
+	 * Set the loginPWD.
 	 * 
 	 * @param loginpwd
-	 *            LoginPWD
+	 *            loginPWD
 	 */
 	public void setLoginpwd(String loginpwd) {
 		this.loginpwd = loginpwd;
 	}
 
 	/**
-	 * Get the LoginPWD.
+	 * Get the loginPWD.
 	 * 
-	 * @return LoginPWD
+	 * @return loginPWD
 	 */
 	public String getLoginpwd() {
 		return this.loginpwd;
 	}
 
 	/**
-	 * Set the ShowName.
+	 * Set the showName.
 	 * 
 	 * @param showname
-	 *            ShowName
+	 *            showName
 	 */
 	public void setShowname(String showname) {
 		this.showname = showname;
 	}
 
 	/**
-	 * Get the ShowName.
+	 * Get the showName.
 	 * 
-	 * @return ShowName
+	 * @return showName
 	 */
 	public String getShowname() {
 		return this.showname;
 	}
 
 	/**
-	 * Set the LoginIP.
+	 * Set the loginIP.
 	 * 
 	 * @param loginip
-	 *            LoginIP
+	 *            loginIP
 	 */
 	public void setLoginip(String loginip) {
 		this.loginip = loginip;
 	}
 
 	/**
-	 * Get the LoginIP.
+	 * Get the loginIP.
 	 * 
-	 * @return LoginIP
+	 * @return loginIP
 	 */
 	public String getLoginip() {
 		return this.loginip;
 	}
 
 	/**
-	 * Set the LastTime.
+	 * Set the lastTime.
 	 * 
 	 * @param lasttime
-	 *            LastTime
+	 *            lastTime
 	 */
 	public void setLasttime(Date lasttime) {
 		this.lasttime = lasttime;
 	}
 
 	/**
-	 * Get the LastTime.
+	 * Get the lastTime.
 	 * 
-	 * @return LastTime
+	 * @return lastTime
 	 */
 	public Date getLasttime() {
 		return this.lasttime;
 	}
 
 	/**
-	 * Set the Status.
+	 * Set the status.
 	 * 
 	 * @param status
-	 *            Status
+	 *            status
 	 */
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
 
 	/**
-	 * Get the Status.
+	 * Get the status.
 	 * 
-	 * @return Status
+	 * @return status
 	 */
 	public Integer getStatus() {
 		return this.status;
 	}
 
 	/**
-	 * Set the WxID.
+	 * Set the wxID.
 	 * 
 	 * @param wxid
-	 *            WxID
+	 *            wxID
 	 */
 	public void setWxid(String wxid) {
 		this.wxid = wxid;
 	}
 
 	/**
-	 * Get the WxID.
+	 * Get the wxID.
 	 * 
-	 * @return WxID
+	 * @return wxID
 	 */
 	public String getWxid() {
 		return this.wxid;
 	}
 
 	/**
-	 * Set the ContactInfo.
+	 * Set the contactInfo.
 	 * 
 	 * @param contactinfo
-	 *            ContactInfo
+	 *            contactInfo
 	 */
 	public void setContactinfo(String contactinfo) {
 		this.contactinfo = contactinfo;
 	}
 
 	/**
-	 * Get the ContactInfo.
+	 * Get the contactInfo.
 	 * 
-	 * @return ContactInfo
+	 * @return contactInfo
 	 */
 	public String getContactinfo() {
 		return this.contactinfo;
 	}
 
 	/**
-	 * Set the CreatTime.
+	 * Set the creatTime.
 	 * 
 	 * @param creattime
-	 *            CreatTime
+	 *            creatTime
 	 */
 	public void setCreattime(Date creattime) {
 		this.creattime = creattime;
 	}
 
 	/**
-	 * Get the CreatTime.
+	 * Get the creatTime.
 	 * 
-	 * @return CreatTime
+	 * @return creatTime
 	 */
 	public Date getCreattime() {
+		if(this.creattime==null){
+			return new Date();
+		}
 		return this.creattime;
 	}
 
 	/**
-	 * Set the CardID.
+	 * Set the cardID.
 	 * 
 	 * @param cardid
-	 *            CardID
+	 *            cardID
 	 */
 	public void setCardid(String cardid) {
 		this.cardid = cardid;
 	}
 
 	/**
-	 * Get the CardID.
+	 * Get the cardID.
 	 * 
-	 * @return CardID
+	 * @return cardID
 	 */
 	public String getCardid() {
 		return this.cardid;
 	}
 
 	/**
-	 * Set the UserType.
+	 * Set the userType.
 	 * 
 	 * @param usertype
-	 *            UserType
+	 *            userType
 	 */
 	public void setUsertype(String usertype) {
 		this.usertype = usertype;
 	}
 
 	/**
-	 * Get the UserType.
+	 * Get the userType.
 	 * 
-	 * @return UserType
+	 * @return userType
 	 */
 	public String getUsertype() {
 		return this.usertype;
+	}
+
+	/**
+	 * Set the departmentID.
+	 * 
+	 * @param departmentid
+	 *            departmentID
+	 */
+	public void setDepartmentid(Integer departmentid) {
+		this.departmentid = departmentid;
+	}
+
+	/**
+	 * Get the departmentID.
+	 * 
+	 * @return departmentID
+	 */
+	public Integer getDepartmentid() {
+		return this.departmentid;
 	}
 
 	/**

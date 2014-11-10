@@ -1,8 +1,0 @@
-/**
- * 
- */
-/**
- * @author YiFeng
- *
- */
-package debeans;

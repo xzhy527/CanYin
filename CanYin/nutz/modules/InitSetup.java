@@ -1,31 +1,46 @@
 package modules;
+import java.io.File;
+import java.util.List;
+import java.util.Map;
+
+import org.nutz.dao.Chain;
 import org.nutz.dao.Dao;
 import org.nutz.dao.entity.Entity;
+import org.nutz.dao.entity.annotation.Table;
 import org.nutz.ioc.Ioc;
+import org.nutz.json.Json;
+import org.nutz.lang.Files;
 import org.nutz.mvc.NutConfig;
 import org.nutz.mvc.Setup;
+import org.nutz.resource.Scans;
 
 import db_beans.DbTable;
+import db_beans.DbUser;
 import tools.MyDao;
 public class InitSetup implements Setup{
 	@Override
 	public void init(NutConfig nc) {
-		// TODO Auto-generated method stub
 		Ioc ioc = nc.getIoc();
 		MyDao mydao = ioc.get(null,"dao");
-		if(!mydao.exists(DbTable.class)){
-			mydao.create(DbTable.class, false);
-			DbTable tbean = new DbTable();
-			tbean.setAlias("第一桌");
-			tbean.setTablename("第一桌");
-			tbean.setTabletype("大厅");
-			mydao.insert(tbean);
-			
-			/**
-			 * 通过文本配置文件，写数据
-			 */			
+		File file = Files.findFile("db_beans/testdata.js");
+		Map initData=null;
+		if(file!=null)initData= Json.fromJsonFile(Map.class,file);
+		for(Class<?> klass : Scans.me().scanPackage("db_beans")){
+			Table tAn = klass.getAnnotation(Table.class);
+			if(null != tAn){
+				System.out.println("表名:"+tAn.value());
+				if(!mydao.exists(klass)){
+					mydao.create(klass, false);
+					if(initData==null)continue;
+					List tabledatalist=(List) initData.get(tAn.value());
+					if(tabledatalist==null)continue;
+					for (Object object : tabledatalist) {
+						mydao.insert(klass, Chain.from(object));				
+					}
+				}
+				
+			}
 		}
-	
 	}
 
 	@Override

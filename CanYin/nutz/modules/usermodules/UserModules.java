@@ -16,11 +16,11 @@ import org.nutz.mvc.annotation.Ok;
 import org.nutz.mvc.view.JspView;
 import org.nutz.mvc.view.ViewWrapper;
 
-import com.sun.xml.internal.ws.util.StringUtils;
+
+
 
 import tools.MyDao;
 import tools.MyLong;
-import db_beans.DbConfig;
 import db_beans.DbOptlog;
 import db_beans.DbUser;
 import debeans.AjaxJSON;
@@ -33,7 +33,9 @@ public View login_Base(String loginName,String loginPWD,HttpSession session){
 	if(Strings.isBlank(loginName)||Strings.isBlank(loginPWD))
 		return AjaxJSON.AjaxJSON("登陆信息不符合规则", null);
 	
-	DbUser ub = dao.fetch(DbUser.class, loginName);
+	DbUser ub =(DbUser) dao.query(DbUser.class,Cnd.where("loginName","=",loginName));
+	
+	//DbUser ub = dao.fetch(DbUser.class,loginName);
 	if(ub==null){
 		return AjaxJSON.AjaxJSON("用户名不存在", null);
 	}

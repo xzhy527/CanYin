@@ -1,20 +1,34 @@
 package modules.usermodules;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
 import org.nutz.lang.Strings;
 import org.nutz.mvc.annotation.At;
 import org.nutz.mvc.annotation.Ok;
+
 import tools.MyDao;
 import tools.MyLong;
 @IocBean
 public class CommonMoudlues{
 	@Inject
 	MyDao dao;
+	
 @At()
 @Ok("json")
-public Object getwaiters(Integer GroupID,String UserType){	
+public Object caiconng(){
+	
+	System.out.println(new Date());
+	return null;
+}
+	
+	
+@At()
+@Ok("json")
+public List getwaiters(Integer GroupID,String UserType){	
 	Map map=new HashMap();
 	map.put("GroupID", GroupID);
 	map.put("UserType", UserType);
@@ -44,7 +58,6 @@ public Object getwaiters(String GroupName,String UserType){
 		if(isnuumber){
 			return getwaiters(Integer.valueOf(GroupName),UserType);
 		}
-		
 		String ddObject=(String) dao.getConfig("员工分组", null, null, GroupName, "intvalue");	
 		groupid=Integer.valueOf(ddObject);
 		return getwaiters(groupid,UserType);
@@ -53,10 +66,6 @@ public Object getwaiters(String GroupName,String UserType){
 	}
 	return null;
 }
-		
-	
-	
-	
 	
 	
 	

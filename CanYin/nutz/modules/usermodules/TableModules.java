@@ -73,7 +73,6 @@ public class TableModules {
 			}
 			tablebean.setState("使用中");
 			tablebean.setStarttime(new java.sql.Date(new java.util.Date().getTime()));
-			tablebean.setWaiter(waiter);
 			tablebean.setAllowpeople(persons);
 			tablebean.setSalesid(MyLong.gen_SaleID());
 			dao.update(tablebean);
