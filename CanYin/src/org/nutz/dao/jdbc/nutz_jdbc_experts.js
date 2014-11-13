@@ -29,7 +29,7 @@ var ioc = {
 	 */
 	config : {
 	// 默认的 Clob 以及 Blog 临时目录
-	"pool-home" : "~/.nutz/tmp/dao/",
+	"pool-home" : "/home/xzhy5275xwzch6yj55207/wwwroot/",
 	// 临时目录大小，0 为不限大小
 	"pool-max" : 200000,
 	// Mysql 特殊配置

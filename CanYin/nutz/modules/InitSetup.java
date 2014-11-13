@@ -28,7 +28,6 @@ public class InitSetup implements Setup{
 		for(Class<?> klass : Scans.me().scanPackage("db_beans")){
 			Table tAn = klass.getAnnotation(Table.class);
 			if(null != tAn){
-				System.out.println("表名:"+tAn.value());
 				if(!mydao.exists(klass)){
 					mydao.create(klass, false);
 					if(initData==null)continue;

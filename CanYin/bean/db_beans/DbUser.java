@@ -26,7 +26,7 @@ public class DbUser implements Serializable {
 	private Integer groupid;
 
 	/** loginName. */
-	@Name
+
 	private String loginname;
 
 	/** loginPWD. */
@@ -265,6 +265,7 @@ public class DbUser implements Serializable {
 	 *            creatTime
 	 */
 	public void setCreattime(Date creattime) {
+		System.out.println(creattime);
 		this.creattime = creattime;
 	}
 

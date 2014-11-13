@@ -1,7 +1,5 @@
 package modules.usermodules;
-
 import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,11 +14,11 @@ import org.nutz.mvc.annotation.Ok;
 import org.nutz.mvc.view.JspView;
 import org.nutz.mvc.view.ViewWrapper;
 
-
-
+import com.sun.org.apache.bcel.internal.generic.NEW;
 
 import tools.MyDao;
 import tools.MyLong;
+import tools.YF;
 import db_beans.DbOptlog;
 import db_beans.DbUser;
 import debeans.AjaxJSON;
@@ -28,19 +26,30 @@ import debeans.AjaxJSON;
 public class UserModules {
 	@Inject	
 	MyDao dao;	
+
+	
 @At()
-public View login_Base(String loginName,String loginPWD,HttpSession session){		
+@Ok("json")
+public Object validateLogin(String loginName,String loginPWD){
+	
+	if(Strings.isBlank(loginName)||Strings.isBlank(loginPWD))return new AjaxJSON("登陆信息不符合规则");
+	DbUser ub=dao.fetch(DbUser.class,Cnd.where("loginName","=",loginName));
+	if(ub==null)return new AjaxJSON("用户名不存在",-404);
+	if(!loginPWD.equals(ub.getLoginpwd()))return new AjaxJSON("密码错误",-500);
+	if(ub.getStatus()<1)return new AjaxJSON("禁止进入系统",-403);
+	return new AjaxJSON("用户密码验证成功");
+}	
+@At()
+public View login_Base(String loginName,String loginPWD,HttpSession session){
 	if(Strings.isBlank(loginName)||Strings.isBlank(loginPWD))
 		return AjaxJSON.AjaxJSON("登陆信息不符合规则", null);
-	
-	DbUser ub =(DbUser) dao.query(DbUser.class,Cnd.where("loginName","=",loginName));
-	
-	//DbUser ub = dao.fetch(DbUser.class,loginName);
+	DbUser ub=dao.fetch(DbUser.class,Cnd.where("loginName","=",loginName));
+//	DbUser ub=(DbUser) dao.query(DbUser.class,Cnd.where("loginName","=",loginName));
+//	DbUser ub = dao.fetch(DbUser.class,loginName);
 	if(ub==null){
 		return AjaxJSON.AjaxJSON("用户名不存在", null);
 	}
 	if(!loginPWD.equals(ub.getLoginpwd())){
-	
 		return AjaxJSON.AjaxJSON("密码错误！！", null);
 	}
 	if(ub.getStatus()<1){

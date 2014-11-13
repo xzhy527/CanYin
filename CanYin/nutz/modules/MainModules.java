@@ -21,7 +21,6 @@ import tools.MyDao;
 "*org.nutz.ioc.loader.json.JsonLoader","/dao.js",
 "*org.nutz.ioc.loader.annotation.AnnotationIocLoader","modules",
 })
-
 @IocBean
 public class MainModules {	
 	@Inject

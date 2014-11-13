@@ -46,9 +46,9 @@ public class AjaxJSON {
 	private String message="操作成功";
 	private String navTabId;
 	private String rel;
-	private String callbackType="closeCurrent";
+	private String callbackType;
 	private String forwardUrl;
-	
+	private Object reobj;
 	
 	public AjaxJSON(String message,String forwardUrl){
 		this.message=message;
@@ -71,6 +71,12 @@ public class AjaxJSON {
 	}
 	public static ViewWrapper AjaxJSON(String t_message,String t_url){	
 		return new ViewWrapper(new UTF8JsonView(null), new AjaxJSON(t_message,t_url));
+	}
+	public Object getReobj() {
+		return reobj;
+	}
+	public void setReobj(Object reobj) {
+		this.reobj = reobj;
 	}
 
 	
